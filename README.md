@@ -1,5 +1,6 @@
-#syncthing
-[![Build Status](https://travis-ci.org/whefter/puppet-syncthing.png)](https://travis-ci.org/whefter/puppet-syncthing)
+# syncthing
+
+[![Build Status](https://travis-ci.com/brwyatt/puppet-syncthing.png)](https://travis-ci.com/brwyatt/puppet-syncthing)
 
 **Compatibility note: the Puppet 3.7.0 and 3.8.0 compatibility has been dropped from metadata.json because the Puppet Forge does not provide a way to specifiy "compatible with Puppet 3.8.0 with future parser enabled". The module is, in fact, compatible with Puppet 3.7.0/3.8.0 with future parser enabled.**
 
@@ -9,7 +10,7 @@
 * Almost all defined types relevant to instance configuration now require `instance_name` in addition to `home_path`.
 * On the plus side, it is now possible to create what I like to call "binary" instances that install a defined version of the syncthing binary. See the `binary_version` parameter for more details.
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview](#overview)
 2. [Simple setup](#simple-setup)
@@ -24,14 +25,14 @@
         * [Defined Type: syncthing::folder_device](#defined-type-syncthingfolder-device)
 4. [Limitations - OS compatibility, etc.](#limitations)
 
-##Overview
+## Overview
 **This module is still very much beta. Syncthing itself is still changing rapidly and has a few quirks.**
 
 This Syncthing module is meant to automate large parts of the Syncthing installation, service management and configuration editing. If provides defined types for Syncthing instances and various parts of the Syncthing configuration files.
 
 Daemonization is currently achieved through a modified version of the Yeasoft btsync init.d script. Currently, there are a number of issues, mostly to do with the fact that Syncthing spawns new processes so often.
 
-##Simple setup
+## Simple setup
 
 **What syncthing affects:**
 
@@ -39,7 +40,7 @@ Daemonization is currently achieved through a modified version of the Yeasoft bt
 * Configuration file directory `(/etc/syncthing` by default)
 * The `init.d` script for Syncthing, if present (`/etc/init.d/syncthing`)
 
-###Beginning with Syncthing
+### Beginning with Syncthing
 
 Install Syncthing, the service (init.d script) with default paths, no instances:
 
@@ -47,7 +48,7 @@ Install Syncthing, the service (init.d script) with default paths, no instances:
 class { 'syncthing': }
 ```
 
-###Syncthing instances
+### Syncthing instances
 
 Instances can be declared directly in the Syncthing base class, or by defined types:
 
@@ -84,142 +85,142 @@ or:
 }
 ```
 
-##Usage
+## Usage
 
-###Classes and Defined Types
+### Classes and Defined Types
 
 
-####Class: `syncthing`
+#### Class: `syncthing`
 
 Installs Syncthing and sets up the init.d service. The download URL is determined from the Syncthing Github releases page.
 
 **Parameters within `syncthing`:**
 
-#####`bin`
+##### `bin`
 
 Override the assumed value for the Syncthing binary name. Defaults to `syncthing`.
 
-#####`binpath`
+##### `binpath`
 
 Override the assumed value for the path to the Syncthing binary. Defaults to `/usr/local/bin`. This will actually by a symlink to the latest downloaded syncthing Binary.
 
-#####`store_path`
+##### `store_path`
 
 Override the assumed path to store downloaded and extracted Syncthing releases in. Defaults to `/usr/local/share/syncthing`.
 
-#####`instancespath`
+##### `instancespath`
 
 Override the assumed value to the Syncthing instances configuration files. Defaults to `/etc/syncthing`.
 
-#####`package_version`
+##### `package_version`
 
 Override the value used for the installation. Defaults to `latest`, in which case new releases will be downloaded when they are publishing on the Syncthing Github page. Note that Syncthing also has an auto-update mechanism.
 
-#####`manage_repo`
+##### `manage_repo`
 
 Boolean to install syncthing APT repository. Defaults to `true`.
 Set it to `false` to control package installation using your internal / personal repository.
 
-#####`package_name`
+##### `package_name`
 
 The name of the package that will be used for syncthing installation. Defaults to `syncthing`.
 Nice option for those we built their own packages.
 
-#####`instances`
+##### `instances`
 
 Hash that will be used to declare `syncthing::instance` resources.
 
-#####`folders`
+##### `folders`
 
 Hash that will be used to declare `syncthing::folder` resources.
 
-#####`devices`
+##### `devices`
 
 Hash that will be used to declare `syncthing::device` resources.
 
-#####`services_type`
+##### `services_type`
 
 The module attempts to determine the service provider and, based on this, the service file type to install (systemd, initd), on its own, first using the service_provider fact, then based on the OS version. This may or may not work, depending on your setup. This can be used to override the automatically determined value. Pass in "systemd" or "initd".
 
-#####`create_home_path`
+##### `create_home_path`
 
 Override the default value passed to `syncthing::instance`for `create_home_path`.
 
-#####`daemon_uid`
+##### `daemon_uid`
 
 Override the default value passed to `syncthing::instance`for `daemon_uid`.
 
-#####`daemon_gid`
+##### `daemon_gid`
 
 Override the default value passed to `syncthing::instance`for `daemon_gid`.
 
-#####`daemon_umask`
+##### `daemon_umask`
 
 Override the default value passed to `syncthing::instance`for `daemon_umask`.
 
-#####`daemon_nice`
+##### `daemon_nice`
 
 Override the default value passed to `syncthing::instance`for`daemon_nice`.
 
-#####`daemon_debug`
+##### `daemon_debug`
 
 Override the default value passed to `syncthing::instance` for `daemon_debug`.
 
-#####`gui`
+##### `gui`
 
 Override the default value passed to `syncthing::instance`for `gui`.
 
-#####`gui_tls`
+##### `gui_tls`
 
 Override the default value passed to `syncthing::instance`for `gui_tls`.
 
-#####`gui_address`
+##### `gui_address`
 
 Override the default value passed to `syncthing::instance`for `gui_address`.
 
-#####`gui_port`
+##### `gui_port`
 
 Override the default value passed to `syncthing::instance` for `gui_port`.
 
-#####`gui_apikey`
+##### `gui_apikey`
 
 Override the default value passed to `syncthing::instance`for `gui_apikey`.
 
-#####`gui_user`
+##### `gui_user`
 
 Override the default value passed to `syncthing::instance`for `gui_user`.
 
-#####`gui_password`
+##### `gui_password`
 
 Override the default value passed to `syncthing::instance`for `gui_password`.
 
 > See the notes on `gui_password` and `gui_password_salt` in the parameters for `syncthing::instance` for some important information regarding these two options.
 
-#####`gui_password_salt`
+##### `gui_password_salt`
 
 Override the default value passed to `syncthing::instance`for `gui_password_salt`.
 
-#####`gui_options`
+##### `gui_options`
 
 Override the default value passed to `syncthing::instance`for `gui_options`.
 
-#####`instance_options`
+##### `instance_options`
 
 Override the default value passed to `syncthing::instance` for `options`.
 
-#####`device_compression `
+##### `device_compression `
 
 Override the default value passed to `syncthing::device` for `compression `.
 
-#####`device_introducer `
+##### `device_introducer `
 
 Override the default value passed to `syncthing::device` for `introducer`.
 
-#####`device_options`
+##### `device_options`
 
 Override the default value passed to `syncthing::device` for `options`.
 
-####Defined Type: `syncthing::instance`
+#### Defined Type: `syncthing::instance`
 
 Creates an instance. Provides some parameters for common options and an `options` parameter to override or set arbitrary options.
 
@@ -233,28 +234,28 @@ Creates an instance. Provides some parameters for common options and an `options
 
 **Parameters within `syncthing::instance`:**
 
-#####`ensure`
+##### `ensure`
 
 Specify whether the instance configuration file is present or absent. Defaults to 'present'. Valid values are 'present' and 'absent'.
 
-#####`home_path`
+##### `home_path`
 
 The home path for this instance. Where the configuration file and all certificates are stored. Mandatory parameter, will be created by Syncthing if not present.
 
-#####`create_home_path`
+##### `create_home_path`
 
 Attempt to recursively create the passed home path prior to calling Syncthing to generate the configuration/certificates. This will be
 called in the context of the user identified by `daemon_uid`.
 
-#####`binary`
+##### `binary`
 
 Sets this instance to be a "binary instance", meaning it will download a Syncthing binary to the path specified by `binary_path` and use that binary instead of the package-provided binary.
 
-#####`binary_path`
+##### `binary_path`
 
 If `binary` is set to `true`, the Syncthing binary will be downloaded to this path.
 
-#####`binary_version`
+##### `binary_version`
 
 The Syncthing version to get when downloading a Syncthing binary. Defaults to `latest`.
 
@@ -262,50 +263,50 @@ The Syncthing version to get when downloading a Syncthing binary. Defaults to `l
 
 **This has the advantage that a binary instance, once created, can be upgraded independently from other instances, in constrast with "package instances", which all share the package binary and get upgraded/restarted when the package is upgraded.**
 
-#####`daemon_uid`
+##### `daemon_uid`
 
 The UID to run the daemon for this instance as.
 
-#####`daemon_gid`
+##### `daemon_gid`
 
 The GID to run the daemon for this instance as.
 
-#####`daemon_umask`
+##### `daemon_umask`
 The umask to run the daemon for this instance with.
 
-#####`daemon_nice`
+##### `daemon_nice`
 
 The niceness level for the instance daemon.
 
-#####`daemon_debug`
+##### `daemon_debug`
 
 The debug level for the instance daemon.
 
-#####`gui`
+##### `gui`
 
 Enable or disable the GUI. Valid values are `true` or `false`. Defaults to `true`.
 
-#####`gui_tls`
+##### `gui_tls`
 
 Enable or disable SSL for the GUI. Valid values are `true` or `false`. Defaults to `true`.
 
-#####`gui_address`
+##### `gui_address`
 
 The address the GUI should listen at. Defaults to `0.0.0.0`.
 
-#####`gui_port`
+##### `gui_port`
 
 Binding port for the GUI. Defaults to `8080`.
 
-#####`gui_apikey`
+##### `gui_apikey`
 
 The API key for the GUI.
 
-#####`gui_user`
+##### `gui_user`
 
 Providing this and `gui_password` enables user authentication.
 
-#####`gui_password`
+##### `gui_password`
 
 Password to use to authenticate for the GUI.
 
@@ -319,7 +320,7 @@ One method to hash a password with a random salt to obtain a hash for that passw
 ruby -e "require 'bcrypt'; puts BCrypt::Engine.hash_secret('<<<PASSWORD>>>', BCrypt::Engine.generate_salt);"`
 ```
 
-#####`gui_password_salt`
+##### `gui_password_salt`
 
 This must be set to a valid BCrypt salt such as `$2a$10$vI8aWBnW3fID.ZQ4/zo1G.` when providing plaintext passwords for hashing through this module.
 
@@ -331,15 +332,15 @@ ruby -e "require 'bcrypt'; salt = BCrypt::Engine.generate_salt; puts salt;"
 
 > Setting this parameter will result in the module attempting to generate a BCrypt-encrypted password. This requires the `bcrypt` gem to be installed on the puppetmaster.
 
-#####`gui_options`
+##### `gui_options`
 
 Set or override arbitrary GUI options. Created as XML nodes in the `<gui></gui>` element.
 
-#####`options`
+##### `options`
 
 Set or override arbitrary options. Created as XML nodes in the `<options></options>` element.
 
-####Defined Type: `syncthing::device`
+#### Defined Type: `syncthing::device`
 
 Adds a `<device>` entry to the configuration file for the instance associated with the passed home path.
 
@@ -356,43 +357,43 @@ Direct declarations of this type are possible, but discouraged outside of progra
 
 **Parameters within `syncthing::device`:**
 
-#####`ensure`
+##### `ensure`
 
 Specify whether the device configuration is present or absent. Defaults to 'present'. Valid values are 'present' and 'absent'.
 
-#####`home_path`
+##### `home_path`
 
 The home path for the instance that should be told about this device. Mandatory parameter.
 
-#####`instance_name`
+##### `instance_name`
 
 The name of the instance that should be told about this device, as passed to the `instances` parameter on the `syncthing` class. Mandatory parameter.
 
-#####`id`
+##### `id`
 
 The ID for the device in the usual form.
 
-#####`device_name`
+##### `device_name`
 
 The name for the device, defaults to the resource name.
 
-#####`compression`
+##### `compression`
 
 Value to set for the `compression` option for this device. Can be `true` or `false`, defaults to `false`.
 
-#####`introducer`
+##### `introducer`
 
 Value to set for the `introducer` option for this device. Can be `true` or `false`, defaults to `false`.
 
-#####`address`
+##### `address`
 
 Set an address to use to contact the device. Defaults to `dynamic`.
 
-#####`options`
+##### `options`
 
 Set or override arbitrary options. Created as XML nodes in the `<device></device>` element.
 
-####Defined Type: `syncthing::folder`
+#### Defined Type: `syncthing::folder`
 
 Adds a `<folder>` entry to the configuration file for the instance associated with the passed home path.
 
@@ -416,7 +417,7 @@ Direct declarations of this type are possible, but discouraged outside of progra
     'versioning'               => 'staggered',
     'versioning_maxAge'        => '864000',
     'versioning_cleanInterval' => '3600',
-    #for external versioning
+    # for external versioning
     'versioning'         => 'external',
     'versioning_command' => 'cmd',      
   },
@@ -428,48 +429,48 @@ Direct declarations of this type are possible, but discouraged outside of progra
 
 **Parameters within `syncthing::folder`:**
 
-#####`ensure`
+##### `ensure`
 
 Specify whether the device configuration is present or absent. Defaults to 'present'. Valid values are 'present' and 'absent'.
 
-#####`home_path`
+##### `home_path`
 
 The home path for the instance that should be told about this folder. Mandatory parameter.
 
-#####`instance_name`
+##### `instance_name`
 
 The name of the instance that should be told about this device, as passed to the `instances` parameter on the `syncthing` class. Mandatory parameter.
 
-#####`id`
+##### `id`
 
 The ID for the folder. Defaults to the `name` parameter.
 
-#####`path`
+##### `path`
 
 Path to the folder that should be synced.
 
-#####`type`
+##### `type`
 
 Value to set for the folder type. Can be `readwrite` or `readonly`, defaults to `readwrite`.
 
-#####`rescanIntervalS`
+##### `rescanIntervalS`
 
 Value to set for the `rescanIntervalS` option for this device. Defaults to `60`.
 
-#####`ignorePerms`
+##### `ignorePerms`
 
 Value to set for the `ignorePerms` option for this device. Can be `true` or `false`, defaults to `false`.
 
-#####`autoNormalize`
+##### `autoNormalize`
 
 Value to set for the `autoNormalize` option for this device. Can be `true` or `false`, defaults to `false`.
 
 
-#####`options`
+##### `options`
 
 Set or override arbitrary options. Created as XML nodes in the `<folder></folder>` element.
 
-#####`devices`
+##### `devices`
 
 A hash of devices to enable for the folder. Invididual device IDs can be specified and set to `present` or `absent`:
 
@@ -484,7 +485,7 @@ A hash of devices to enable for the folder. Invididual device IDs can be specifi
 }
 ```
 
-####Defined Type: `syncthing::folder_device`
+#### Defined Type: `syncthing::folder_device`
 
 Adds a `<device>` entry for the specified folder.
 
@@ -499,35 +500,35 @@ Adds a `<device>` entry for the specified folder.
 
 **Parameters within `syncthing::folder_device`:**
 
-#####`ensure`
+##### `ensure`
 
 Specify whether the device entry is present or absent. Defaults to 'present'. Valid values are 'present' and 'absent'.
 
-#####`home_path`
+##### `home_path`
 
 The home path for the instance that should be told about this device. Mandatory parameter.
 
-#####`instance_name`
+##### `instance_name`
 
 The name of the instance that should be told about this device, as passed to the `instances` parameter on the `syncthing` class. Mandatory parameter.
 
-#####`folder_id`
+##### `folder_id`
 
 The ID of the folder.
 
-#####`device_id`
+##### `device_id`
 
 The ID of the device.
 
-##Reference
+## Reference
 
-###Classes
+### Classes
 
-####Public Classes
+#### Public Classes
 
 * [`syncthing`](#class-syncthing): Basic setup.
 
-####Private Classes
+#### Private Classes
 
 * `syncthing::install_package`: Installs the Syncthing package.
 * `syncthing::install_binary`: Downloads a Syncthing binary.
@@ -535,17 +536,17 @@ The ID of the device.
 * `syncthing::instance_service`: Provides commands that emulate service start/stop/restart for binary Syncthing instances.
 * `syncthing::params`: Manages Syncthing parameters.
 
-###Defined Types
+### Defined Types
 
-####Public Defined Types
+#### Public Defined Types
 
 * `syncthing::instance`
 * `syncthing::device`
 * `syncthing::folder`
 * `syncthing::folder_device`: Adds a known device to a folder.
 
-##Limitations
+## Limitations
 
-###Operating system support
+### Operating system support
 
 Currently, only Debian and Ubuntu are supported. Debian has been tested more extensively. Contributions adding support for further OSes are welcome!
