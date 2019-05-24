@@ -2,6 +2,15 @@
 
 [![Build Status](https://travis-ci.com/brwyatt/puppet-syncthing.png)](https://travis-ci.com/brwyatt/puppet-syncthing)
 
+[![GitHub license](https://img.shields.io/badge/license-GPL-blue.svg)](https://raw.githubusercontent.com/brwyatt/puppet-syncthing/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/brwyatt/puppet-syncthing.svg)](https://github.com/brwyatt/puppet-syncthing/issues)
+[![GitHub forks](https://img.shields.io/github/forks/brwyatt/puppet-syncthing.svg)](https://github.com/brwyatt/puppet-syncthing/network)
+[![GitHub stars](https://img.shields.io/github/stars/brwyatt/puppet-syncthing.svg)](https://github.com/brwyatt/puppet-syncthing/stargazers)
+
+[![Puppet Forge](https://img.shields.io/puppetforge/v/brwyatt/syncthing.svg)](https://forge.puppetlabs.com/brwyatt/syncthing)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/brwyatt/syncthing.svg)](https://forge.puppetlabs.com/brwyatt/syncthing)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/brwyatt/syncthing.svg)](https://forge.puppetlabs.com/brwyatt/syncthing)
+
 **Compatibility note: the Puppet 3.7.0 and 3.8.0 compatibility has been dropped from metadata.json because the Puppet Forge does not provide a way to specifiy "compatible with Puppet 3.8.0 with future parser enabled". The module is, in fact, compatible with Puppet 3.7.0/3.8.0 with future parser enabled.**
 
 **Version 1.0.0 has a (small) number of incompatible changes, most notably:**
