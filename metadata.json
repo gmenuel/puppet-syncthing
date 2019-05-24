@@ -1,6 +1,6 @@
 {
   "name": "brwyatt-syncthing",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "author": "Bryan Wyatt",
   "summary": "Syncthing module for Puppet.",
   "license": "GPL-2.0",
