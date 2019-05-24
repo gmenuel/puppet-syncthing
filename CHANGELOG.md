@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.4] - 2019-05-24
 ### Added
+- PDK Convert
 - Resurrect abandoned project: [whefter/puppet-syncthing](https://github.com/whefter/puppet-syncthing)
 - CHANGELOG
 ### Fixed
