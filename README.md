@@ -33,6 +33,7 @@
         * [Defined Type: syncthing::folder](#defined-type-syncthingfolder)
         * [Defined Type: syncthing::folder_device](#defined-type-syncthingfolder-device)
 4. [Limitations - OS compatibility, etc.](#limitations)
+5. [Special Notes and Acknowledgements](#special-notes-and-acknowledgements)
 
 ## Overview
 **This module is still very much beta. Syncthing itself is still changing rapidly and has a few quirks.**
@@ -559,3 +560,7 @@ The ID of the device.
 ### Operating system support
 
 Currently, only Debian and Ubuntu are supported. Debian has been tested more extensively. Contributions adding support for further OSes are welcome!
+
+### Special Notes and Acknowledgements
+
+This module is a continuation of William Hefter's [Syncthing Puppet module](https://github.com/whefter/puppet-syncthing) which was abandoned July 8th, 2018. Everything this module is or may become is thanks to the time and effort he put in to the project.
