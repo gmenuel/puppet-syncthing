@@ -68,8 +68,8 @@ define syncthing::instance_service
       file { $configpath:
         ensure => absent,
       }
-      ->
-      exec { "stop syncthing instance ${instance_name}":
+
+      -> exec { "stop syncthing instance ${instance_name}":
         command  => "/usr/sbin/service syncthing stop \"${instance_name}\"",
         provider => shell,
       }
@@ -157,13 +157,13 @@ define syncthing::instance_service
         command  => "/usr/sbin/service syncthing stop syncthing@${daemon_uid}",
         provider => shell,
       }
-      ->
-      exec { "enable systemd service for ${instance_name}":
+
+      -> exec { "enable systemd service for ${instance_name}":
         command  => "/bin/systemctl disable syncthing@${daemon_uid}",
         provider => shell,
       }
-      ->
-      file { "/etc/systemd/system/syncthing@${daemon_uid}.service":
+
+      -> file { "/etc/systemd/system/syncthing@${daemon_uid}.service":
         ensure => 'absent',
       }
     }

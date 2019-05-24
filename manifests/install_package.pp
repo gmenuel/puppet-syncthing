@@ -4,6 +4,6 @@ class syncthing::install_package {
   }
 
   Package[$::syncthing::package_name]
-  ~>
-  Exec <| tag == 'syncthing_package_instance_service' and tag == 'syncthing_instance_service_restart' |>
+
+  ~> Exec <| tag == 'syncthing_package_instance_service' and tag == 'syncthing_instance_service_restart' |>
 }

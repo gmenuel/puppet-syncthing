@@ -30,8 +30,8 @@ define syncthing::install_binary
     user    => $user,
     creates => $path,
   }
-  ->
-  file { $path:
+
+  -> file { $path:
     ensure => directory,
     owner  => $user,
     group  => $group,

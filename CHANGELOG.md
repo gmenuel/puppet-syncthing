@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Resurrect abandoned project: [whefter/puppet-syncthing](https://github.com/whefter/puppet-syncthing)
 - CHANGELOG
 ### Fixed
+- Style Guide errors
 - README formatting issues
 - [Folder versioning params assume a specific order](https://github.com/brwyatt/puppet-syncthing/issues/1)
 - [There is no syncthing service](https://github.com/whefter/puppet-syncthing/pull/34)
