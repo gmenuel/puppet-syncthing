@@ -51,6 +51,10 @@ matrix:
     
   # Ruby 2.0.0
   - rvm: 2.0.0
+    env: PUPPET_VERSION="~> 4.7.0" STRICT_VARIABLES=yes
+  - rvm: 2.0.0
+    env: PUPPET_VERSION="~> 4.8.0" STRICT_VARIABLES=yes
+  - rvm: 2.0.0
     env: PUPPET_VERSION="~> 4.9.0" STRICT_VARIABLES=yes
   - rvm: 2.0.0
     env: PUPPET_VERSION="~> 4.10.0" STRICT_VARIABLES=yes
