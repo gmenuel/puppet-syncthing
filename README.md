@@ -441,7 +441,7 @@ Direct declarations of this type are possible, but discouraged outside of progra
 
 ##### `ensure`
 
-Specify whether the device configuration is present or absent. Defaults to 'present'. Valid values are 'present' and 'absent'.
+Specify whether the folder configuration is present or absent. Defaults to `present`. Valid values are `present` and `absent`.
 
 ##### `home_path`
 
@@ -449,7 +449,7 @@ The home path for the instance that should be told about this folder. Mandatory 
 
 ##### `instance_name`
 
-The name of the instance that should be told about this device, as passed to the `instances` parameter on the `syncthing` class. Mandatory parameter.
+The name of the instance that should be told about this folder, as passed to the `instances` parameter on the `syncthing` class. Mandatory parameter.
 
 ##### `id`
 
@@ -463,18 +463,26 @@ Path to the folder that should be synced.
 
 Value to set for the folder type. Can be `readwrite` or `readonly`, defaults to `readwrite`.
 
-##### `rescanIntervalS`
+##### `rescan_interval_s`
 
-Value to set for the `rescanIntervalS` option for this device. Defaults to `60`.
+Value to set for the `rescanIntervalS` option for this folder. Defaults to `60`.
 
-##### `ignorePerms`
+##### `ignore_perms`
 
-Value to set for the `ignorePerms` option for this device. Can be `true` or `false`, defaults to `false`.
+Value to set for the `ignorePerms` option for this folder. Can be `true` or `false`, defaults to `false`.
 
-##### `autoNormalize`
+##### `auto_normalize`
 
-Value to set for the `autoNormalize` option for this device. Can be `true` or `false`, defaults to `false`.
+Value to set for the `autoNormalize` option for this folder. Can be `true` or `false`, defaults to `false`.
 
+##### `fs_watcher_enabled`
+
+Value to set for the `fsWatcherEnabled` option for this folder. Can be `true` or `false`, defaults to `false`.
+
+##### `fs_watcher_delay_s`
+
+Value to set for the `fsWatcherDelayS` option for this folder. Defaults to `10`.
+Values equal or lower than `0` will cause Syncthing to set `fsWatcherEnabled` to `false` and `fsWatcherDelayS` to `10`.
 
 ##### `options`
 
@@ -482,7 +490,7 @@ Set or override arbitrary options. Created as XML nodes in the `<folder></folder
 
 ##### `devices`
 
-A hash of devices to enable for the folder. Invididual device IDs can be specified and set to `present` or `absent`:
+A hash of devices to enable for the folder. Individual device IDs can be specified and set to `present` or `absent`:
 
 ```puppet
 ::syncthing::folder { 'laptop':

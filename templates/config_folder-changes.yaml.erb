@@ -6,6 +6,8 @@
  - 'set folder[#attribute/id="<%= @id %>"]/#attribute/rescanIntervalS <%= @rescan_interval_s %>'
  - 'set folder[#attribute/id="<%= @id %>"]/#attribute/ignorePerms <%= @ignore_perms %>'
  - 'set folder[#attribute/id="<%= @id %>"]/#attribute/autoNormalize <%= @auto_normalize %>'
+ - 'set folder[#attribute/id="<%= @id %>"]/#attribute/fsWatcherEnabled <%= @fs_watcher_enabled %>'
+ - 'set folder[#attribute/id="<%= @id %>"]/#attribute/fsWatcherDelayS <%= @fs_watcher_delay_s %>'
 
 <%- @devices.each do |dev_id, dev_ensure| -%>
 <%- if dev_ensure == 'present' -%>
