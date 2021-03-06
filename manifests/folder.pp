@@ -6,21 +6,23 @@ define syncthing::folder
   $instance_name,
   # Path to the folder
   $path,
-  $label            = $name,
+  $label              = $name,
 
-  $ensure           = 'present',
+  $ensure             = 'present',
 
-  $id               = $name,
+  $id                 = $name,
 
-  $type              = 'readwrite',
-  $rescan_interval_s = '60',
-  $ignore_perms      = false,
-  $auto_normalize    = false,
+  $type               = 'readwrite',
+  $rescan_interval_s  = '60',
+  $ignore_perms       = false,
+  $auto_normalize     = false,
+  $fs_watcher_enabled = false,
+  $fs_watcher_delay_s = '10',
 
-  $options          = {},
+  $options            = {},
 
   # This is a hash containing pairs such as 'id' => 'absent/present'
-  $devices          = {},
+  $devices            = {},
 )
 {
   if ! defined(Class['syncthing']) {
