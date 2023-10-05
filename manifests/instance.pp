@@ -1,52 +1,44 @@
 define syncthing::instance
 (
-  $home_path,
+  Stdlib::Absolutepath $home_path,
 
-  $ensure            = 'present',
+  String $ensure            = 'present',
 
   # Download and use a separate syncthing binary instead of the package binary
-  $binary            = false,
+  Boolean $binary            = false,
   # Path to the binary
-  $binary_path       = false,
+  Variant[Boolean, Stdlib::Absolutepath] $binary_path       = false,
   # Version to download. Since syncthing automatically upgrades itself, no
   # binary will be downloaded if it already exists; only initially. This instance
   # will then rely on auto-upgrading or user-upgrading.
-  $binary_version    = 'latest',
+  String $binary_version    = 'latest',
 
-  $create_home_path  = $::syncthing::create_home_path,
+  Boolean $create_home_path  = $::syncthing::create_home_path,
 
-  $daemon_uid        = $::syncthing::daemon_uid,
-  $daemon_gid        = $::syncthing::daemon_gid,
-  $daemon_umask      = $::syncthing::daemon_umask,
-  $daemon_nice       = $::syncthing::daemon_nice,
-  $daemon_debug      = $::syncthing::daemon_debug,
+  String $daemon_uid             = $::syncthing::daemon_uid,
+  String $daemon_gid             = $::syncthing::daemon_gid,
+  String $daemon_umask           = $::syncthing::daemon_umask,
+  Optional[Integer] $daemon_nice = $::syncthing::daemon_nice,
+  Optional[String] $daemon_debug = $::syncthing::daemon_debug,
 
-  $gui               = $::syncthing::gui,
-  $gui_tls           = $::syncthing::gui_tls,
-  $gui_address       = $::syncthing::gui_address,
-  $gui_port          = $::syncthing::gui_port,
-  $gui_apikey        = $::syncthing::gui_apikey,
-  $gui_user          = $::syncthing::gui_user,
-  $gui_password      = $::syncthing::gui_password,
-  $gui_password_salt = $::syncthing::gui_password_salt,
-  $gui_options       = $::syncthing::gui_options,
+  Boolean $gui                        = $::syncthing::gui,
+  Boolean $gui_tls                    = $::syncthing::gui_tls,
+  String $gui_address                 = $::syncthing::gui_address,
+  String $gui_port                    = $::syncthing::gui_port,
+  Optional[String] $gui_apikey        = $::syncthing::gui_apikey,
+  Optional[String] $gui_user          = $::syncthing::gui_user,
+  Optional[String] $gui_password      = $::syncthing::gui_password,
+  Optional[String] $gui_password_salt = $::syncthing::gui_password_salt,
+  Hash $gui_options                   = $::syncthing::gui_options,
 
-  $options           = $::syncthing::instance_options,
+  Hash $options           = $::syncthing::instance_options,
 
-  $devices           = {},
-  $folders           = {},
+  Hash $devices           = {},
+  Hash $folders           = {},
 )
 {
   if ! defined(Class['syncthing']) {
     fail('You must include the syncthing base class before using any syncthing defined resources')
-  }
-
-  validate_bool($gui)
-  validate_hash($gui_options)
-  validate_hash($options)
-
-  if $gui_password_salt {
-    validate_string($gui_password_salt)
   }
 
 #  if $gui_password and !$gui_password_salt {
@@ -162,7 +154,7 @@ define syncthing::instance
       ],
     }
 
-    if (has_key($options, 'globalAnnounceServer')) {
+    if ('globalAnnounceServer' in $options) {
       $changes_announce_server = parseyaml( template('syncthing/config_announce_server-changes.yaml.erb') )
       augeas {"add custom globalAnnounceServer for instance ${name}":
         incl    => $instance_config_xml_path,
